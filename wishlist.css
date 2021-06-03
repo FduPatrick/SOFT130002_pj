@@ -1,0 +1,95 @@
+button{
+    width: 80px;
+    height: 30px;
+    float: right;
+    border: none;
+}
+button:hover{
+    background-color: rgb(94, 90, 90);
+    color: white;
+
+}
+.content{
+    width: 60%;
+    height: 1000px;
+    margin: 0 auto;
+}
+.title{
+    margin-top: 20px;
+    line-height: 112px;
+    height: 112px;
+    width: 614;
+    float: left;
+    background-color: rgb(218, 209, 209);
+}
+.title h2{
+    width: 604px;
+    font-size: 40px;
+    margin-left: 10px;
+    text-align: left;
+}
+.item{
+    padding: 6px;
+    border: solid 1px;
+    width: 600px;
+    float: left;
+    height: 10%;
+}
+.image{
+    float: left;
+    height: 100%;
+    width: 100px;
+}
+.text{
+    margin-left: 10px;
+    float: left;
+    width:380px ;
+    height: 100px;
+}
+.text p{
+    font-size: 15px;
+    line-height: 20px;
+    text-align: left;
+}
+.image img{
+    height: 100%;
+    width: 100px;
+}
+.user{
+    padding: 6px 10px;
+    margin-right:104px;
+    margin-top: 20px;
+    height: 150px;
+    background-color: burlywood;
+    width: 350px;
+    float:right;
+}
+.hphoto{
+    
+    height: 130px;
+    width: 130px;
+    float: left;
+}
+.hphoto img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 100%;
+    width: 100px;
+}
+.username{
+    margin-top: 10px;
+    height: 60px;
+    width: 200px;
+    float: right;
+}
+.username p{
+    line-height: 25px;
+    text-align: left;
+}
+.text a{
+    color: black;
+}
+a:hover{
+    color: rgb(17, 21, 243);
+    
+}

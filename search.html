@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta name="applicable-device" content="pc,mobile">
+        <meta charset="utf-8">
+        <title>search</title>
+        <link type="text/css" href="css.css" rel="stylesheet">
+        <link type="text/css" href="search.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="box">
+            <div id="header" class="header">
+                <div class="logo">
+                    <h3><big>Art Store</big> <small>where you find GENIUS and EXTRAORDINARY</small></h3>
+                </div>
+                <div class="menu">
+                    <ul class="list">
+                        <li ><a href="title.php">首页</a> &nbsp;</li>
+                        <li ><a href="search.php">搜索</a> &nbsp;</li>
+                        <li ><a href="log.html">登陆</a> &nbsp;</li>
+                        <li ><a href="enroll.html">注册</a> &nbsp;</li>
+                    </ul>
+                </div>
+
+            </div>
+            <script>
+                if(history.length==3)
+                {
+                    add('首页','title');
+                    add('详情','information');
+                    add('搜索','search');
+
+                }
+                else if(history.length==2)
+                {
+                    add('首页','title');
+                    add('搜索','search');
+
+                }
+                function add(value,name){
+                    var a=document.createElement('a'),
+                        atext=document.createTextNode(value+'>'),
+                        d=document.getElementById('header');
+                    
+                    a.appendChild(atext);
+                    d.appendChild(a);
+                    a.href=name+'.php';
+                    a.className='jsa';
+
+                }
+            </script>
+            <div class="mainer">
+            <form action="search.php" method="POST">
+
+                <div class="search">
+                    <input id="sear" type="search" name="search" 
+                    <?php echo "value='{$search}'";?> placeholder="搜索一下">
+                    <div class="search-button">
+                        <button type="submit" id="btn1" >搜索</button>
+                    </div>
+                    
+                </div>
+                <div class="select">
+                    <p>搜索结果筛选:</p>
+                    <input <?php if(in_array('artist',$q)){ echo 'checked';}?> type="checkbox" name="q[]" value="artist">作者&nbsp;
+                    <input <?php if(in_array('title',$q)){ echo 'checked';}?> type="checkbox" name="q[]" value="title">作品名&nbsp;
+                    <input <?php if(in_array('description',$q)){ echo 'checked';}?> type="checkbox" name="q[]" value="description">介绍&nbsp;
+                </div>
+                
+                <div class="content">
+                    <h1>搜索结果：</h1>
+                    
+    
+                    
+                    <?php if(isset($artworks)) :?>
+                    <div class="sort">
+                        <ul class="list">
+                            
+                            <li ><button style="border: none;" name="sortprice">根据价格升序</button> &nbsp;</li>
+                            <li ><button style="border: none;" name="sortview">根据点击量升序</button> &nbsp;</li>
+                        </ul>
+                    </div>
+                    <?php foreach($artworks as $artwork):?>
+                    
+                    <div class="item">
+                        <div class="image">
+                            <img src="<?php echo 'img/'.$artwork['imageFileName'];?>">
+                        </div>
+                        <div class="text">
+                            <p>作品名称：<?php echo $artwork['title'];?></p>
+                            <p>作者:<?php echo $artwork['artist'];?></p>
+                            <p>作品流派:<?php echo $artwork['genre'];?></p>
+                        </div>
+                    </div>
+                    <?php endforeach;
+                    endif;?>
+                    
+                </div>
+                <div class="pag">
+                    <ul class="pagination">
+                        <li><a href="#">«</a></li>
+                        <li><a class="active" href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+            </form>
+            </div>
+            <div class="footer">
+                <p>
+                    @ArtStore.Produced and maintained by Achillessanger at 2018.4.1.All Rights Reserved
+                </p>
+
+            </div>
+        </div>
+    </body>

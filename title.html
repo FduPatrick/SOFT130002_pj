@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta name="applicable-device" content="pc,mobile">
+        <meta charset="utf-8">
+        <title>首页</title>
+        <link  rel = "stylesheet"  type = "text/css"  href = "flexslider.css" />
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="jquery.flexslider.js"></script>
+        <script type="text/javascript" src="jquery.flexslider-min.js"></script>
+
+        <link type="text/css" href="css.css" rel="stylesheet">
+        <link type="text/css" href="title.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div class="box">
+            <div id="header" class="header">
+                <div class="logo">
+                    <h3><big>Art Store</big> <small>where you find GENIUS and EXTRAORDINARY</small></h3>
+                </div>
+                <div class="menu">
+                    <ul class="list">
+                        <li ><a href="title.php">首页</a> &nbsp;</li>
+                        <li ><a href="search.php">搜索</a> &nbsp;</li>
+                        <li ><a href="log.html">登陆</a> &nbsp;</li>
+                        <li ><a href="enroll.html">注册</a> &nbsp;</li>
+                    </ul>
+                </div>
+
+            </div>
+            <script>
+                add('首页','title');
+                function add(value,name){
+                    var a=document.createElement('a'),
+                        atext=document.createTextNode(value+'>'),
+                        d=document.getElementById('header');
+                    
+                    a.appendChild(atext);
+                    d.appendChild(a);
+                    a.href=name+'.php';
+                    a.className='jsa';
+
+                }
+            </script>
+            <div id="abc">
+                <!--防止轮播出bug-->
+            </div>
+            <div class="banner">
+                <div id="flexslider" class="flexslider">
+                    <ul class="slides">
+                    <li class="image"><a href="information.php?id=<?php echo $sortview[0]['artworkID'];?>"><img src="<?php echo 'img/'.$sortview[0]['imageFileName'] ;?>" draggable="false"></a></li>
+                    <li class="image"><a href="information.php?id=<?php echo $sortview[1]['artworkID'];?>"><img src="<?php echo 'img/'.$sortview[1]['imageFileName'] ;?>" draggable="false"></a></li>
+                    <li class="image"><a href="information.php?id=<?php echo $sortview[2]['artworkID'];?>"><img src="<?php echo 'img/'.$sortview[2]['imageFileName'] ;?>" draggable="false"></a></li>
+                    <li class="image"><a href="information.php?id=<?php echo $sortview[3]['artworkID'];?>"><img src="<?php echo 'img/'.$sortview[3]['imageFileName'] ;?>" draggable="false"></a></li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    $(function(){
+                    $(".flexslider").flexslider({
+                    animation: "fade",
+                    slideshowSpeed:5000,
+                    animationSpeed:600,
+                    directionNav:false,
+                    });
+                    });
+                </script>
+            </div>
+            
+            <div class="mainer" style="height:1300px">
+                <div class="ma-top">
+                    
+                    <br><p>Most viewed</p><br>
+                </div>
+                <?php
+                for($i=0;$i<3;$i++):?>
+                <div class="ma" style=" width: 33.3%;
+                                        float: left;
+                                        height: 800px;
+                                        ">
+                    <div style="margin: 0px 40px;
+                                height: 800px;">
+                        <table>
+                            <tr>
+                                <td style="height: 250px;">
+                                    <img src="<?php echo 'img/'.$sorttime[$i]['imageFileName'] ;?>" style="width:50%;height:300px">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b><?php echo $sorttime[$i]['title'] ;?></b></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b><?php echo $sorttime[$i]['artist'] ;?></b></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><?php echo $sorttime[$i]['description'] ;?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="information.php?id=<?php echo $sorttime[$i]['artworkID'];?>" > 
+                                        LEARN MORE
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <?php endfor;?>
+                <!-- <div class="ma"style=" width: 33.3%;
+                                        float: left;
+                                        height: 600px;">
+                    <table>
+                        <tr>
+                            <td style="height: 250px;">
+                                <img src="莫奈-日出印象.jpg">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><b>Impression Sunrise</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><b>Claude Monet</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p> Impression Sunrise fitted perfectly<br>
+                                    with Monet's burgeoning style<br>
+                                    which favored painting outside <br>
+                                    and completing a first impression <br>
+                                    of a scene in one sitting
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="详情.html">
+                                    LEARN MORE
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="ma"style=" width: 33.3%;
+                                        float: left;
+                                        height: 600px;">
+                    <table>
+                        <tr>
+                            <td style="height: 250px;">
+                                <img src="毕加索.jpg">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><b>Musicians with masks</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><b>Pablo Picasso</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p> The Large Bathers is so called<br>
+                                    because it was Cézanne's <br>
+                                    largest composition in the series<br>
+                                    and it was the last to be produced
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="详情.html">
+                                    LEARN MORE
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div> -->
+            </div>
+            <div class="footer">
+                <p>
+                    @ArtStore.Produced and maintained by Achillessanger at 2018.4.1.All Rights Reserved
+                </p>
+            </div>
+
+        </div>
+    </body>
+</html>

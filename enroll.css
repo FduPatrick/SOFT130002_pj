@@ -1,0 +1,98 @@
+*{
+    font-size: 110%;
+    margin: 0;
+    padding: 0;
+}
+button:hover{
+    color: rgb(16, 19, 212);
+}
+button{
+    cursor: pointer;
+}
+div.box{
+    margin: 30px;
+    margin-bottom: 0;
+}
+
+div.title{
+    height:300px;
+    line-height: 400px;
+}
+div.title h1{
+    font-size: 200%;
+    margin: 0 auto;
+    text-align: center;
+}
+div.tip{
+    height: 100px;
+}
+div.tip p{
+    margin: 0 auto;
+    text-align: center;
+}
+div.text{
+    height: 250px;
+}
+form.username{
+    margin: 0 auto;
+}
+[placeholder]{
+    font-size: 70%;
+}
+form.username input{
+    
+    width: 300px;
+    height: 30px;
+    display: block;
+    text-align: left;
+    margin: 0 auto;
+}
+div.button{
+    
+    height: 210px;
+    margin-bottom: 120px;
+}
+button.button1{
+    height: 50px;
+    border: none;
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+button.button2{
+    height: 40px;
+    border: none;
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;    
+}
+button.button3{
+    height: 40px;
+    border: none;
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+div.footer{
+    margin-bottom: 0;
+    height: 60px;
+    background-color: black;
+    line-height: 60px;
+}
+div.footer p{
+    font-size: 50%;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+a.a1{
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    color: white;
+    text-decoration: none;
+}

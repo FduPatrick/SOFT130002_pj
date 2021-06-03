@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta name="applicable-device" content="pc,mobile">
+        <meta charset="utf-8">
+        <titlesearch</title>
+        <script type="text/javascript" src="jQuery图片局部放大特效\jQuery图片局部放大特效\js\mzp-packed.js"></script>
+        <link href="jQuery图片局部放大特效\jQuery图片局部放大特效\css\zzsc.css" type="text/css" rel="stylesheet">
+        <link href="jQuery图片局部放大特效\jQuery图片局部放大特效\css\magiczoomplus.css" type="text/css" rel="stylesheet">
+        <!--图片放大器插件-->
+        <link type="text/css" href="css.css" rel="stylesheet">
+        <link type="text/css" href="information.css" rel="stylesheet">
+    </head>
+    <body>
+        <script src="alert.js"></script>
+        <div class="box">
+            <div id="header" class="header">
+                <div class="logo">
+                    <h3><big>Art Store</big> <small>where you find GENIUS and EXTRAORDINARY</small></h3>
+                </div>
+                <div class="menu">
+                    <ul class="list">
+                        <li ><a href="title.php">首页</a> &nbsp;</li>
+                        <li ><a href="search.php">搜索</a> &nbsp;</li>
+                        <li ><a href="log.html">登陆</a> &nbsp;</li>
+                        <li ><a href="enroll.html">注册</a> &nbsp;</li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                if(history.length==2||history.length>3)
+                {
+                    add('首页','title');
+                    add('详情','infomation');
+                }
+                function add(value,name){
+                    var a=document.createElement('a'),
+                        atext=document.createTextNode(value+'>'),
+                        d=document.getElementById('header');
+                    
+                    a.appendChild(atext);
+                    d.appendChild(a);
+                    a.href=name+'.php';
+                    a.className='jsa';
+
+                }
+            </script>
+
+            <div class="title">
+                <hr><br>
+                <h1><?php echo $artwork['title'];?></h1>
+                <p><big><?php echo $artwork['artist'];?></big></p>
+                <br><hr>
+            </div>
+            
+            <div class="mainer">
+                <div class="image">
+                    <a href="<?php echo 'img/'.$artwork['imageFileName'];?>" id="zoom1" class="MagicZoom MagicThumb"><img src="<?php echo 'img/'.$artwork['imageFileName'];?>" id="main_img" class="main_img" style="height: 600px;width: 600px;"></a>
+                
+                </div>
+
+                <div class="intro">
+                    <div class="intro-1">
+                        <ul>
+                            <li class="first" style="font-size: 24px;"><h2><?php echo "Painting Genre:{$artwork['genre']}"?></h2></li>
+                            <li style="font-size: 20px;"><?php echo "Dimensions:{$artwork['width']}cm x {$artwork['height']}cm"?></li>
+                            <li style="font-size: 20px;"><?php echo "Year:{$artwork['yearOfWork']}"?></li>
+                            <li class="first"><h2><?php echo "HEAT:{$artwork['view']}"?></h2></li>
+                        </ul>
+                        <hr><br>
+                        <h1><?php echo "Price:{$artwork['price']}USD"?></h1>
+                    </div>
+                    <div class="button">
+                        <ul>
+                            
+                            <?php
+                            include_once 'my_error.php';
+                            $res=my_error("select * from wishlist where artworkID={$artwork['artworkID']}");
+                            if(mysqli_num_rows($res)==0):?>
+                        
+                            <li><a href="wishin.php?id=<?php echo $artwork['artworkID']; ?>"><button class="button1" >ADD TO WISH LIST</button></a></li>
+                            
+                            <?php else:?>
+                            <p style="line-height: 40px;color: gray;"><b>IT HAS BEEN IN YOUR WISH LIST</b></p>
+                            <li><a href="wishout.php?id=<?php echo $artwork['artworkID']; ?>"><button class="button1" >REMOVE FROM WISH LIST</button></a></li>
+                            <?php endif;?>
+                            <li><button class="button1">ADD TO SHOPPING CART</button></li>
+                        </ul>
+                    </div>
+                    <div class="artist">
+                        <hr>
+                        <!-- <table>
+                            <tr>
+                                <td rowspan="2" style="width: 100px;"><img src="毕加索2.jpg" width="80%"></td>
+                                <td><a href="information.html"  ><b>Pablo Picasso</b></a></td>
+                            </tr>
+                            <tr>
+                                <td>Looking for his/her other paintings</td>
+                            </tr>
+                        </table>
+                        <hr><br> -->
+                        <p style="line-height: 40px;"><b>See More Goods</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <p>
+                    @ArtStore.Produced and maintained by Achillessanger at 2018.4.1.All Rights Reserved
+                </p>
+            </div>
+
+            
+        </div>
+        
+    </body>
+    
+</html>
