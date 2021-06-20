@@ -65,7 +65,7 @@ div.sort ul li{
     
     width: 600px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 10px;
     height: 1000px;
 }
 .content h1{
@@ -101,13 +101,15 @@ div.sort ul li{
     width: 100px;
 }
 div.pag{
+    
     text-align: center;
     width: 500px;
     margin: 0 auto;
+    margin-top: 40px;
 }
 ul.pagination {
     
-    display: inline-block;/*内联元素*/
+    display: inline-block;
     padding: 0;
     
 }

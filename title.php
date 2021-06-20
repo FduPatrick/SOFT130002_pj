@@ -1,4 +1,12 @@
 <?php
+    session_start();//启动session
+    $log=isset($_SESSION['log'])?$_SESSION['log']:0;
+    if($log==1)
+    {
+        $userID=$_SESSION['userID'];
+    }
+//获取登录的用户信息
+
     include_once 'my_error.php';
     $conn=my_error('select * from artworks');
     //echo mysqli_num_rows($conn);
@@ -21,5 +29,7 @@
     $sortview=$artworks;
     //sorttime按降序存发布时间
     //sortview按降序存访问数量
+
+
     include_once 'title.html';
     ?>

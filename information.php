@@ -1,7 +1,10 @@
 <?php
+session_start();
 header('Content-type:text/html');
 //接受要显示的艺术品ID
 $id=isset($_GET['id'])?(integer)$_GET['id']:0;
+$userID=isset($_SESSION['userID'])?$_SESSION['userID']:0;
+$log=isset($_SESSION['log'])?$_SESSION['log']:0;
 
 if($id==0)
 {

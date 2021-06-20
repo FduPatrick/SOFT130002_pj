@@ -23,8 +23,14 @@
                     <ul class="list">
                         <li ><a href="title.php">首页</a> &nbsp;</li>
                         <li ><a href="search.php">搜索</a> &nbsp;</li>
+                        <?php if($log==0):?>
                         <li ><a href="log.html">登陆</a> &nbsp;</li>
                         <li ><a href="enroll.html">注册</a> &nbsp;</li>
+                        <?php else:?>
+                        <li ><a href="logout.php">登出</a> &nbsp;</li>
+
+                        <li><a href="wishlist.php" >用户:<?php echo $_SESSION['username'];?></a></li>
+                        <?php endif;?>
                     </ul>
                 </div>
             </div>
@@ -76,7 +82,10 @@
                             
                             <?php
                             include_once 'my_error.php';
-                            $res=my_error("select * from wishlist where artworkID={$artwork['artworkID']}");
+                            if($userID!=0)
+                            {
+                            
+                            $res=my_error("select * from wishlist where artworkID={$artwork['artworkID']} and userID={$userID}");
                             if(mysqli_num_rows($res)==0):?>
                         
                             <li><a href="wishin.php?id=<?php echo $artwork['artworkID']; ?>"><button class="button1" >ADD TO WISH LIST</button></a></li>
@@ -85,7 +94,12 @@
                             <p style="line-height: 40px;color: gray;"><b>IT HAS BEEN IN YOUR WISH LIST</b></p>
                             <li><a href="wishout.php?id=<?php echo $artwork['artworkID']; ?>"><button class="button1" >REMOVE FROM WISH LIST</button></a></li>
                             <?php endif;?>
+                            
                             <li><button class="button1">ADD TO SHOPPING CART</button></li>
+                            <?php }
+                            else{?>
+                            <li><p style="font-size: 25px;">请先登录后再进行操作</p></li>
+                            <?php }?>
                         </ul>
                     </div>
                     <div class="artist">

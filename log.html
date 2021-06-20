@@ -14,14 +14,18 @@
             <div class="tip">
                 <p>please enter your username and password</p>
             </div>
+            <form action="log.php" method="POST" id="myform">
             <div class="text">
-                <form class="username">
-                    <input type="text" id="un"  placeholder="用户名"><br>
-                    <input type="password" id="pwd"  placeholder="密码">
-                </form>
+                
+                <input type="text" name="username" id="un"  placeholder="用户名"><br>
+                <input type="password" name="password" id="pwd"  placeholder="密码">
+                
             </div>
+            </form>
+            <button class="button1">LOG IN</button>
+            
             <div class="button">
-                <button class="button1">LOG IN</button>
+                
                 <a class="a1"href="enroll.html"><button class="button2">CREAT ACCOUNT</button></a>
                 <a class="a1"href="title.php"><button class="button3">返回主页</button></a>
             </div>
@@ -32,20 +36,29 @@
                     btn=document.getElementsByClassName('button1');
                 btn[0].onclick=function()
                 {
-                    if(usern.value&&passw.value)
+                    if(usern.value&&passw.value&&pass(passw.value))
                     {
-                        alert1('登录成功');
+                        document.getElementById('myform').submit();
                     }
                     else if(!usern.value)
                     {
                         alert1('请输入用户名');
 
                     }
-                    else
+                    else if(!passw.value)
                     {
                         alert1('请输入密码');
 
                     }
+                    else if(!pass(passw.value))
+                    {
+                        alert1('请输入正确的密码格式');
+                    }
+
+                function pass(x)
+                {
+                    return (/[a-z]/i.test(x))&&(/[0-9]/.test(x))
+                }
 
                 }
             </script>

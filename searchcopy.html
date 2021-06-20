@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+        <meta name="applicable-device" content="pc,mobile">
+        <meta charset="utf-8">
+        <title>search</title>
+        <link type="text/css" href="css.css" rel="stylesheet">
+        <link type="text/css" href="search.css" rel="stylesheet">
+        <script src="jquery-3.6.0.js"></script>
+        <script>
+            $.ajaxSetup({cache: false});
+            //页面默认展示所有的搜索结果
+            $(document).ready(function(){
+                $(".content").load("test.php",
+                {
+                    text:'',
+                    artist:0,
+                    name:0,
+                    desc:0
+
+                });
+                //对复选框的选取进行判定
+                var check1=0,check2=0,check3=0;
+                $("#check1").click(function(){
+                    check1=$("#check1").prop("checked")?1:0;
+                })
+                $("#check2").click(function(){
+                    check2=$("#check2").prop("checked")?1:0;
+                })
+                $("#check3").click(function(){
+                    
+                    check3=$("#check3").prop("checked")?1:0;
+                })
+
+                $("#btn1").click(function(){
+                    var text=$("#sear").val();
+                    $(".content").load("test.php",
+                    {
+                        text:text,
+                        artist:check1,
+                        name:check2,
+                        desc:check3,
+                        
+                    })
+                    //用于从服务器获取页面数量，构建分页
+                    $.post("test.php",
+                    {
+                        text:text,
+                        artist:check1,
+                        name:check2,
+                        desc:check3,
+                        post:1    
+                    },
+                    function(data){//构建分页栏
+                        console.log(data);
+                        $("div.pag").html("<ul class='pagination'></ul>");
+                        $("ul.pagination").append("<li><a id='last'>«</a></li>");
+                        for(var i=1;i<=data;i++)
+                        {
+                            
+                            $("ul.pagination").append("<li><a >"+i+"</a></li>")
+                        }
+                        $("ul.pagination").append("<li><a id='next'>»</a></li>");
+
+                        $("a:contains(1)").addClass("active");
+                        var count=$(".pagination a").length-2;//获取分页个数
+                        var active=$("a.active").text();
+
+                        $(".pagination a").click(function(){
+                            var text=$("#sear").val();
+                            var check1=0,check2=0,check3=0;
+                            $("#check1").click(function(){
+                                check1=$("#check1").prop("checked")?1:0;
+                            })
+                            $("#check2").click(function(){
+                                check2=$("#check2").prop("checked")?1:0;
+                            })
+                            $("#check3").click(function(){
+                                
+                                check3=$("#check3").prop("checked")?1:0;
+                            })
+
+                            if($(this).prop("id")=="last")
+                            {
+                                if(active>1)
+                                {
+                                    console.log(123);
+                                    $("a.active").parent().prev().children().prop("class","active");
+                                    $("a.active:last").removeClass("active");
+                                    active=$("a.active").text();//更新当前页码 
+                                    var page=$("a.active").text();
+                                    console.log(page);
+                                    $(".content").load("test.php",
+                                    {
+                                        text:text,
+                                        artist:check1,
+                                        name:check2,
+                                        desc:check3,
+                                        page:page
+                                    })
+
+                                }
+                            }
+                            else if($(this).prop("id")=="next")
+                            {
+                                if(active<count)
+                                {
+                                    console.log(321);
+                                    $("a.active").parent().next().children().prop("class","active");
+                                    $("a.active:first").removeClass("active");
+                                    active=$("a.active").text();//更新当前页码 
+                                    var page=$("a.active").text();
+                                    console.log(page);
+                                    $(".content").load("test.php",
+                                    {
+                                        text:text,
+                                        artist:check1,
+                                        name:check2,
+                                        desc:check3,
+                                        page:page
+                                    })
+
+                                }
+                            }
+                            else{
+
+                                $("a.active").removeClass("active");
+                                $(this).prop("class","active");   
+                                active=$("a.active").text();//更新当前页码 
+                                //加载ajax
+
+                                var page=$("a.active").text();
+                                console.log(page);
+                                $(".content").load("test.php",
+                                {
+                                    text:text,
+                                    artist:check1,
+                                    name:check2,
+                                    desc:check3,
+                                    page:page
+                                })
+                            }
+                            
+                            
+                        })
+
+                    })
+                
+
+                    
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="box">
+            <div id="header" class="header">
+                <div class="logo">
+                    <h3><big>Art Store</big> <small>where you find GENIUS and EXTRAORDINARY</small></h3>
+                </div>
+                <div class="menu">
+                    <ul class="list">
+                        <li ><a href="title.php">首页</a> &nbsp;</li>
+                        <li ><a href="search.php">搜索</a> &nbsp;</li>
+                        <li ><a href="log.html">登陆</a> &nbsp;</li>
+                        <li ><a href="enroll.html">注册</a> &nbsp;</li>
+                    </ul>
+                </div>
+
+            </div>
+            <script>
+                if(history.length==3)
+                {
+                    add('首页','title');
+                    add('详情','information');
+                    add('搜索','search');
+
+                }
+                else if(history.length==2)
+                {
+                    add('首页','title');
+                    add('搜索','search');
+
+                }
+                function add(value,name){
+                    var a=document.createElement('a'),
+                        atext=document.createTextNode(value+'>'),
+                        d=document.getElementById('header');
+                    
+                    a.appendChild(atext);
+                    d.appendChild(a);
+                    a.href=name+'.php';
+                    a.className='jsa';
+
+                }
+            </script>
+            <div class="mainer">
+
+                <div class="search">
+                    <input id="sear" type="search"  placeholder="搜索一下">
+                    <div class="search-button">
+                        <button type="submit" id="btn1" >搜索</button>
+                    </div>
+                    
+                </div>
+                <div class="select">
+                    <p>搜索结果筛选:</p>
+                    <input  type="checkbox" id="check1" value="artist">作者&nbsp;
+                    <input  type="checkbox" id="check2" value="title">作品名&nbsp;
+                    <input  type="checkbox" id="check3" value="description">介绍&nbsp;
+                </div>
+                <h1 style="margin-top: 15px;">搜索结果：</h1>
+                <div class="content">
+                </div>
+                <div class="pag">
+                    <!-- <ul class="pagination">
+                        <li><a id="last" >«</a></li>
+                        <li><a class="active" >1</a></li>
+                        <li><a >2</a></li>
+                        <li><a >3</a></li>
+                        <li><a >4</a></li>
+                        <li><a >5</a></li>
+                        <li><a >6</a></li>
+                        <li><a >7</a></li>
+                        <li><a id="next" >»</a></li>
+                    </ul> -->
+                </div>
+                <!-- <script>
+                    $(document).ready(function f(){
+                        var count=$(".pagination a").length-2;//获取分页个数
+                        var active=$("a.active").text();
+
+                        $(".pagination a").click(function(){
+                            var text=$("#sear").val();
+                            var check1=0,check2=0,check3=0;
+                            $("#check1").click(function(){
+                                check1=$("#check1").prop("checked")?1:0;
+                            })
+                            $("#check2").click(function(){
+                                check2=$("#check2").prop("checked")?1:0;
+                            })
+                            $("#check3").click(function(){
+                                
+                                check3=$("#check3").prop("checked")?1:0;
+                            })
+
+                            if($(this).prop("id")=="last")
+                            {
+                                if(active>1)
+                                {
+                                    console.log(123);
+                                    $("a.active").parent().prev().children().prop("class","active");
+                                    $("a.active:last").removeClass("active");
+                                    active=$("a.active").text();//更新当前页码 
+                                    var page=$("a.active").text();
+                                    console.log(page);
+                                    $(".content").load("test.php",
+                                    {
+                                        text:text,
+                                        artist:check1,
+                                        name:check2,
+                                        desc:check3,
+                                        page:page
+                                    },f())
+
+                                }
+                            }
+                            else if($(this).prop("id")=="next")
+                            {
+                                if(active<count)
+                                {
+                                    console.log(321);
+                                    $("a.active").parent().next().children().prop("class","active");
+                                    $("a.active:first").removeClass("active");
+                                    active=$("a.active").text();//更新当前页码 
+                                    var page=$("a.active").text();
+                                    console.log(page);
+                                    $(".content").load("test.php",
+                                    {
+                                        text:text,
+                                        artist:check1,
+                                        name:check2,
+                                        desc:check3,
+                                        page:page
+                                    })
+
+                                }
+                            }
+                            else{
+
+                                $("a.active").removeClass("active");
+                                $(this).prop("class","active");   
+                                active=$("a.active").text();//更新当前页码 
+                                //加载ajax
+
+                                var page=$("a.active").text();
+                                console.log(page);
+                                $(".content").load("test.php",
+                                {
+                                    text:text,
+                                    artist:check1,
+                                    name:check2,
+                                    desc:check3,
+                                    page:page
+                                })
+                            }
+                            
+                            
+                        })
+                        
+                        
+                    })
+                </script> -->
+            
+            
+            <div class="footer">
+                <p>
+                    @ArtStore.Produced and maintained by Achillessanger at 2018.4.1.All Rights Reserved
+                </p>
+
+            </div>
+        </div>
+    </body>

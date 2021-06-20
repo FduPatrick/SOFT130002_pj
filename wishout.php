@@ -1,4 +1,5 @@
 <?php
+session_start();
 //用于首页显示取消收藏成功和删除收藏
 include_once 'my_error.php';
 $id=isset($_GET['id'])?(integer)$_GET['id']:0;
@@ -11,6 +12,6 @@ if($id==0)
 }
 echo '取消收藏成功！';
 
-my_error("delete from wishlist where artworkID={$id}");
+my_error("delete from wishlist where artworkID={$id} and userID={$_SESSION['userID']}");
 header("refresh:2;url=information.php?id={$id}");
 ?>

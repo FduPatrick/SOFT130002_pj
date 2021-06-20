@@ -7,17 +7,18 @@ function my_error($sql)
     $username = "root";
     $password = "";
 
-    $conn=mysqli_connect($servername,$username,$password);
+    $conn=mysqli_connect($servername,$username,$password,'mydatabase');
     if(!$conn)
     {
         echo '连接错误';
         exit;
     }
-    mysqli_query($conn,'use mydatabase;');
+    //mysqli_query($conn,'use mydatabase;');
     $res=mysqli_query($conn,$sql);
+    
     if(!$res)//连接错误
     {
-        echo 'SQL执行错误，错误信息为：'.mysqli_error().'<br/>';
+        echo 'SQL执行错误';
         exit;
     }
     return $res;//返回结果

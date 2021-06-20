@@ -1,7 +1,10 @@
 <?php
+    session_start();
     include_once 'my_error.php';
-    $conn1=my_error('select * from wishlist');//创建与wishlist的连接
-    $conn2=my_error('select * from users');//创建与users的连接
+    $log=isset($_SESSION['log'])?$_SESSION['log']:0;
+    $userID=$_SESSION['userID'];
+    $conn1=my_error("select * from wishlist where userID={$userID}");//创建与wishlist的连接
+    $conn2=my_error("select * from users where userID={$userID}");//创建与users的连接
 
     $wishlist=array();
 
